@@ -1,24 +1,27 @@
 <?php
 
+use Pear\Image3D;
+use Pear\Image3D\Color;
+
 set_time_limit(0);
 require_once(__DIR__ . '/../../vendor/autoload.php');
 
-$world = new Image_3D();
-$world->setColor(new Image_3D_Color(80, 80, 80));
+$world = new Image3D();
+$world->setColor(new Color(80, 80, 80));
 
 $light = $world->createLight('Light', array(-1000, -1000, -1000));
-$light->setColor(new Image_3D_Color(255, 255, 255));
+$light->setColor(new Color(255, 255, 255));
 
 $redSpot = $world->createLight('Spotlight', array(0, 0, -200, 'aim' => array(0, -25, 0), 'angle' => 30, 'float' => 2));
-$redSpot->setColor(new Image_3D_Color(255, 0, 0));
+$redSpot->setColor(new Color(255, 0, 0));
 
 $blueSpot = $world->createLight('Spotlight', array(0, 0, -200, 'aim' => array(-35, 25, 0), 'angle' => 30, 'float' => 2));
-$blueSpot->setColor(new Image_3D_Color(0, 0, 255));
+$blueSpot->setColor(new Color(0, 0, 255));
 
 $greenSpot = $world->createLight('Spotlight', array(0, 0, -200, 'aim' => array(35, 25, 0), 'angle' => 30, 'float' => 2));
-$greenSpot->setColor(new Image_3D_Color(0, 255, 0));
+$greenSpot->setColor(new Color(0, 255, 0));
 
-$bezier = $world->createObject('bezier', array( 'x_detail' => 120, 
+$bezier = $world->createObject('bezier', array( 'x_detail' => 120,
                                                 'y_detail' => 120,
                                                 'points' => array(
         array(  array(200, -150, -200),
@@ -37,7 +40,7 @@ $bezier = $world->createObject('bezier', array( 'x_detail' => 120,
                 array(-150, -150, 200),
             ),
     )));
-$bezier->setColor(new Image_3D_Color(250, 250, 250));
+$bezier->setColor(new Color(250, 250, 250));
 $bezier->transform($world->createMatrix('Rotation', array(0, 120, 180)));
 
 $renderer = $world->createRenderer('perspectively');

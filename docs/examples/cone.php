@@ -1,16 +1,19 @@
 <?php
 
+use Pear\Image3D;
+use Pear\Image3D\Color;
+
 set_time_limit(0);
 require_once(__DIR__ . '/../../vendor/autoload.php');
 
-$world = new Image_3D();
-$world->setColor(new Image_3D_Color(255, 255, 255));
+$world = new Image3D();
+$world->setColor(new Color(255, 255, 255));
 
 $light = $world->createLight('Light', array(-2000, -2000, -2000));
-$light->setColor(new Image_3D_Color(0, 0, 255));
+$light->setColor(new Color(0, 0, 255));
 
 $cone = $world->createObject('cone', array('detail' => 1));
-$cone->setColor(new Image_3D_Color(255, 255, 255, 200));
+$cone->setColor(new Color(255, 255, 255, 200));
 
 $cone->transform($world->createMatrix('Scale', array(100, 400, 100)));
 $cone->transform(

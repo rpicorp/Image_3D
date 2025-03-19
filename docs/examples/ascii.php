@@ -1,26 +1,29 @@
 <?php
 
+use Pear\Image3D;
+use Pear\Image3D\Color;
+
 $images = 'php://output';
 $iterations = 50;
 
 set_time_limit(0);
 require_once(__DIR__ . '/../../vendor/autoload.php');
 
-$world = new Image_3D();
-$world->setColor(new Image_3D_Color(0, 0, 0));
+$world = new Image3D();
+$world->setColor(new Color(0, 0, 0));
 
 $light1 = $world->createLight('Light', array(-500, -500, -500));
-$light1->setColor(new Image_3D_Color(255, 255, 255));
+$light1->setColor(new Color(255, 255, 255));
 
 $light2 = $world->createLight('Light', array(0, 500, -550));
-$light2->setColor(new Image_3D_Color(0, 255, 0));
+$light2->setColor(new Color(0, 255, 0));
 
 $p1 = $world->createObject('cube', array(80, 80, 80));
-$p1->setColor(new Image_3D_Color(200, 200, 200));
+$p1->setColor(new Color(200, 200, 200));
 $p1->transform($world->createMatrix('Rotation', array(45, 45, 0)));
 
-$world->setOption(Image_3D::IMAGE_3D_OPTION_BF_CULLING, false);
-$world->setOption(Image_3D::IMAGE_3D_OPTION_FILLED, true);
+$world->setOption(Image3D::IMAGE_3D_OPTION_BF_CULLING, false);
+$world->setOption(Image3D::IMAGE_3D_OPTION_FILLED, true);
 
 $rotation = $world->createMatrix('Rotation', array(2, 5, 0));
 $renderer = $world->createRenderer('perspectively');

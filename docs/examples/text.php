@@ -1,22 +1,25 @@
 <?php
 
+use Pear\Image3D;
+use Pear\Image3D\Color;
+
 set_time_limit(0);
 require_once(__DIR__ . '/../../vendor/autoload.php');
 
-$world = new Image_3D();
-$world->setColor(new Image_3D_Color(240, 240, 240));
+$world = new Image3D();
+$world->setColor(new Color(240, 240, 240));
 
 $light = $world->createLight('Light', array(-20, -20, -20));
-$light->setColor(new Image_3D_Color(100, 100, 255));
+$light->setColor(new Color(100, 100, 255));
 
 $text = $world->createObject('text', 'Image_3D_Object_Text');
-$text->setColor(new Image_3D_Color(150, 150, 150));
+$text->setColor(new Color(150, 150, 150));
 $text->transform($world->createMatrix('Rotation', array(0, 10, 0)));
 $text->transform($world->createMatrix('Move', array(-50, 0, 20)));
 $text->transform($world->createMatrix('Scale', array(3, 3, 3)));
 
-$world->setOption(Image_3D::IMAGE_3D_OPTION_BF_CULLING, false);
-$world->setOption(Image_3D::IMAGE_3D_OPTION_FILLED, true);
+$world->setOption(Image3D::IMAGE_3D_OPTION_BF_CULLING, false);
+$world->setOption(Image3D::IMAGE_3D_OPTION_FILLED, true);
 
 $world->createRenderer('perspectively');
 $world->createDriver('GD');

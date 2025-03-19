@@ -1,31 +1,34 @@
 <?php
 
+use Pear\Image3D;
+use Pear\Image3D\Color;
+
 require_once(__DIR__ . '/../../vendor/autoload.php');
 
 // Erstellen der Welt
-$world = new Image_3D();
-$world->setColor(new Image_3D_Color(255, 255, 255));
+$world = new Image3D();
+$world->setColor(new Color(255, 255, 255));
 
 // Erstellung einer globalen Lichtquelle
 $light = $world->createLight('Light', array(-2000, -2000, -2000));
-$light->setColor(new Image_3D_Color(155, 155, 155));
+$light->setColor(new Color(155, 155, 155));
 
 // Eines Punktuellen Lichtes mit distancefalloff
 $light = $world->createLight('Point', array(0, -100, 0, 'distance' => 200, 'falloff' => 2));
-$light->setColor(new Image_3D_Color(255, 0, 0));
+$light->setColor(new Color(255, 0, 0));
 
 // Eines Spotlights
 $light = $world->createLight('Spotlight', array(500, -500, -300, 'aim' => array(50, 30, 0), 'angle' => 10, 'float' => 2));
-$light->setColor(new Image_3D_Color(0, 255, 0, 100));
+$light->setColor(new Color(0, 255, 0, 100));
 
 // Erstellen einer Kugel
 $sphere = $world->createObject('sphere', array('r' => 120, 'detail' => 5));
-$sphere->setColor(new Image_3D_Color(200, 200, 200));
+$sphere->setColor(new Color(200, 200, 200));
 $sphere->transform($world->createMatrix('Move', array(70, 40, 0)));
 
 // Import eines 3ds-Objekts (Schriftzug "Image 3D")
 $text = $world->createObject('3ds', __DIR__ . '/models/Image_3D.3ds');
-$text->setColor(new Image_3D_Color(255, 255, 255, 180));
+$text->setColor(new Color(255, 255, 255, 180));
 $text->transform($world->createMatrix('Rotation', array(90, 0, 0)));
 $text->transform($world->createMatrix('Scale', array(5, 5, 5)));
 $text->transform($world->createMatrix('Move', array(0, -40, 0)));

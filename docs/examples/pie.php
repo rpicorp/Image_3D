@@ -1,28 +1,31 @@
 <?php
 
+use Pear\Image3D;
+use Pear\Image3D\Color;
+
 set_time_limit(0);
 require_once(__DIR__ . '/../../vendor/autoload.php');
 
-$world = new Image_3D();
-$world->setColor(new Image_3D_Color(255, 255, 255));
+$world = new Image3D();
+$world->setColor(new Color(255, 255, 255));
 
 $light = $world->createLight('Light', array(0, 1000, 1000));
-$light->setColor(new Image_3D_Color(255, 255, 255));
+$light->setColor(new Color(255, 255, 255));
 
 $pie = $world->createObject('pie', array('start' => 0, 'end' => 120, 'detail' => 20, 'outside' => 150));
-$pie->setColor(new Image_3D_Color(0, 0, 255));
+$pie->setColor(new Color(0, 0, 255));
 
 $pie = $world->createObject('pie', array('start' => 120, 'end' => 165, 'detail' => 20, 'outside' => 150));
-$pie->setColor(new Image_3D_Color(255, 0, 0));
+$pie->setColor(new Color(255, 0, 0));
 
 $pie = $world->createObject('pie', array('start' => 165, 'end' => 240, 'detail' => 20, 'outside' => 150));
-$pie->setColor(new Image_3D_Color(255, 255, 0));
+$pie->setColor(new Color(255, 255, 0));
 
 $pie = $world->createObject('pie', array('start' => 240, 'end' => 360, 'detail' => 20, 'outside' => 150));
-$pie->setColor(new Image_3D_Color(0, 255, 0));
+$pie->setColor(new Color(0, 255, 0));
 
-$world->setOption(Image_3D::IMAGE_3D_OPTION_BF_CULLING, false);
-$world->setOption(Image_3D::IMAGE_3D_OPTION_FILLED, true);
+$world->setOption(Image3D::IMAGE_3D_OPTION_BF_CULLING, false);
+$world->setOption(Image3D::IMAGE_3D_OPTION_FILLED, true);
 
 $world->transform($world->createMatrix('Scale', array(1, 1, 10)));
 $world->transform($world->createMatrix('Rotation', array(-60, 0, 0)));
